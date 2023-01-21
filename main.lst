@@ -1,0 +1,154 @@
+   1               		.file	"main.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               		.data
+  17               	.LC0:
+  18 0000 4275 6666 		.string	"Buffer Index:"
+  18      6572 2049 
+  18      6E64 6578 
+  18      3A00 
+  19               	.LC1:
+  20 000e 2000      		.string	" "
+  21               	.LC2:
+  22 0010 4176 6169 		.string	"Available Bytes:"
+  22      6C61 626C 
+  22      6520 4279 
+  22      7465 733A 
+  22      00
+  23               	.LC3:
+  24 0021 5265 6164 		.string	"Read Index:"
+  24      2049 6E64 
+  24      6578 3A00 
+  25               	.LC4:
+  26 002d 0D0A 00   		.string	"\r\n"
+  27               		.text
+  28               	.global	main
+  30               	main:
+  31               	.LFB6:
+  32               	.LM1:
+  33 0000 CF93      		push r28
+  34 0002 DF93      		push r29
+  35               	/* prologue: function */
+  36               	/* frame size = 0 */
+  37               	.LM2:
+  38 0004 60E8      		ldi r22,lo8(9600)
+  39 0006 75E2      		ldi r23,hi8(9600)
+  40 0008 80E0      		ldi r24,hlo8(9600)
+  41 000a 90E0      		ldi r25,hhi8(9600)
+  42 000c 0E94 0000 		call UART_Init
+  43               	.LBB12:
+  44               	.LBB13:
+  45               	.LBB14:
+  46               	.LBB15:
+  47               	.LM3:
+  48 0010 C0E2      		ldi r28,lo8(20000)
+  49 0012 DEE4      		ldi r29,hi8(20000)
+  50               	.LVL0:
+  51               	.L3:
+  52               	.LBE15:
+  53               	.LBE14:
+  54               	.LBE13:
+  55               	.LBE12:
+  56               	.LM4:
+  57 0014 0E94 0000 		call UART_Bytes_Available_To_Read
+  58               	.LVL1:
+  59 0018 892B      		or r24,r25
+  60 001a 01F0      		breq .L2
+  61               	.LM5:
+  62 001c 80E0      		ldi r24,lo8(.LC0)
+  63 001e 90E0      		ldi r25,hi8(.LC0)
+  64 0020 0E94 0000 		call UART_Transmit_Text
+  65               	.LM6:
+  66 0024 0E94 0000 		call UART_Current_Buffer_Index
+  67 0028 A0E0      		ldi r26,lo8(0)
+  68 002a B0E0      		ldi r27,hi8(0)
+  69 002c BC01      		movw r22,r24
+  70 002e CD01      		movw r24,r26
+  71 0030 0E94 0000 		call UART_Transmit_Number
+  72               	.LM7:
+  73 0034 80E0      		ldi r24,lo8(.LC1)
+  74 0036 90E0      		ldi r25,hi8(.LC1)
+  75 0038 0E94 0000 		call UART_Transmit_Text
+  76               	.LM8:
+  77 003c 80E0      		ldi r24,lo8(.LC2)
+  78 003e 90E0      		ldi r25,hi8(.LC2)
+  79 0040 0E94 0000 		call UART_Transmit_Text
+  80               	.LM9:
+  81 0044 0E94 0000 		call UART_Bytes_Available_To_Read
+  82 0048 A0E0      		ldi r26,lo8(0)
+  83 004a B0E0      		ldi r27,hi8(0)
+  84 004c BC01      		movw r22,r24
+  85 004e CD01      		movw r24,r26
+  86 0050 0E94 0000 		call UART_Transmit_Number
+  87               	.LM10:
+  88 0054 80E0      		ldi r24,lo8(.LC1)
+  89 0056 90E0      		ldi r25,hi8(.LC1)
+  90 0058 0E94 0000 		call UART_Transmit_Text
+  91               	.LM11:
+  92 005c 80E0      		ldi r24,lo8(.LC3)
+  93 005e 90E0      		ldi r25,hi8(.LC3)
+  94 0060 0E94 0000 		call UART_Transmit_Text
+  95               	.LM12:
+  96 0064 0E94 0000 		call UART_Current_Read_Index
+  97 0068 A0E0      		ldi r26,lo8(0)
+  98 006a B0E0      		ldi r27,hi8(0)
+  99 006c BC01      		movw r22,r24
+ 100 006e CD01      		movw r24,r26
+ 101 0070 0E94 0000 		call UART_Transmit_Number
+ 102               	.LM13:
+ 103 0074 80E0      		ldi r24,lo8(.LC1)
+ 104 0076 90E0      		ldi r25,hi8(.LC1)
+ 105 0078 0E94 0000 		call UART_Transmit_Text
+ 106               	.LM14:
+ 107 007c 0E94 0000 		call UART_Read
+ 108 0080 0E94 0000 		call UART_Transmit_Byte
+ 109               	.LM15:
+ 110 0084 80E0      		ldi r24,lo8(.LC4)
+ 111 0086 90E0      		ldi r25,hi8(.LC4)
+ 112 0088 0E94 0000 		call UART_Transmit_Text
+ 113               	.L2:
+ 114               	.LBB19:
+ 115               	.LBB18:
+ 116               	.LBB17:
+ 117               	.LBB16:
+ 118               	.LM16:
+ 119 008c CE01      		movw r24,r28
+ 120               	.LVL2:
+ 121               	/* #APP */
+ 122               	 ;  105 "c:/winavr-20100110/lib/gcc/../../avr/include/util/delay_basic.h" 1
+ 123 008e 0197      		1: sbiw r24,1
+ 124 0090 01F4      		brne 1b
+ 125               	 ;  0 "" 2
+ 126               	/* #NOAPP */
+ 127 0092 00C0      		rjmp .L3
+ 128               	.LBE16:
+ 129               	.LBE17:
+ 130               	.LBE18:
+ 131               	.LBE19:
+ 132               	.LFE6:
+ 158               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+C:\Users\farid\AppData\Local\Temp/ccx2bBMO.s:2      *ABS*:0000003f __SREG__
+C:\Users\farid\AppData\Local\Temp/ccx2bBMO.s:3      *ABS*:0000003e __SP_H__
+C:\Users\farid\AppData\Local\Temp/ccx2bBMO.s:4      *ABS*:0000003d __SP_L__
+C:\Users\farid\AppData\Local\Temp/ccx2bBMO.s:5      *ABS*:00000034 __CCP__
+C:\Users\farid\AppData\Local\Temp/ccx2bBMO.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\farid\AppData\Local\Temp/ccx2bBMO.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\farid\AppData\Local\Temp/ccx2bBMO.s:30     .text:00000000 main
+
+UNDEFINED SYMBOLS
+UART_Init
+UART_Bytes_Available_To_Read
+UART_Transmit_Text
+UART_Current_Buffer_Index
+UART_Transmit_Number
+UART_Current_Read_Index
+UART_Read
+UART_Transmit_Byte
+__do_copy_data
