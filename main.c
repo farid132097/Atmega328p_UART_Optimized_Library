@@ -12,24 +12,10 @@ int main(void){
   while(1){
   
     if(UART_Bytes_Available_To_Read()>0){
-
-      UART_Transmit_Text("Buffer Index:");
-      UART_Transmit_Number(UART_Current_Buffer_Index());
-      UART_Transmit_Text(" ");
-     
-      UART_Transmit_Text("Available Bytes:");
-      UART_Transmit_Number(UART_Bytes_Available_To_Read());
-      UART_Transmit_Text(" ");
-     
-      UART_Transmit_Text("Read Index:");
-      UART_Transmit_Number(UART_Current_Read_Index());
-      UART_Transmit_Text(" ");
-     
       UART_Transmit_Byte(UART_Read());
-      UART_Transmit_Text("\r\n");
+      //UART_Transmit_Text("\r\n");
     }
     _delay_ms(10);
     
   }
 }
-

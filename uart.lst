@@ -1076,7 +1076,7 @@
  1128 04f6 8091 0000 		lds r24,UART
  1129               	.LVL68:
  1130 04fa 8823      		tst r24
- 1131 04fc 01F4      		brne .L107
+ 1131 04fc 01F4      		brne .L108
  1132               	.LM175:
  1133 04fe E091 0000 		lds r30,UART+262
  1134 0502 F091 0000 		lds r31,(UART+262)+1
@@ -1097,103 +1097,116 @@
  1149 052a 9093 0000 		sts (UART+264)+1,r25
  1150 052e 8093 0000 		sts UART+264,r24
  1151               	.LM178:
- 1152 0532 2091 0000 		lds r18,UART+262
- 1153 0536 3091 0000 		lds r19,(UART+262)+1
+ 1152 0532 2091 0000 		lds r18,UART+264
+ 1153 0536 3091 0000 		lds r19,(UART+264)+1
  1154 053a 8091 0000 		lds r24,UART+260
  1155 053e 9091 0000 		lds r25,(UART+260)+1
- 1156 0542 2817      		cp r18,r24
- 1157 0544 3907      		cpc r19,r25
- 1158 0546 00F0      		brlo .L107
- 1159 0548 1092 0000 		sts (UART+262)+1,__zero_reg__
- 1160 054c 1092 0000 		sts UART+262,__zero_reg__
- 1161               	.L107:
- 1162               	/* epilogue start */
- 1163               	.LM179:
- 1164 0550 0F90      		pop __tmp_reg__
- 1165 0552 CF91      		pop r28
- 1166 0554 DF91      		pop r29
- 1167 0556 0895      		ret
- 1168               	.LFE28:
- 1170               	.global	__vector_18
- 1172               	__vector_18:
- 1173               	.LFB29:
- 1174               	.LM180:
- 1175 0558 1F92      		push __zero_reg__
- 1176 055a 0F92      		push r0
- 1177 055c 0FB6      		in r0,__SREG__
- 1178 055e 0F92      		push r0
- 1179 0560 1124      		clr __zero_reg__
- 1180 0562 2F93      		push r18
- 1181 0564 3F93      		push r19
- 1182 0566 4F93      		push r20
- 1183 0568 5F93      		push r21
- 1184 056a 6F93      		push r22
- 1185 056c 7F93      		push r23
- 1186 056e 8F93      		push r24
- 1187 0570 9F93      		push r25
- 1188 0572 AF93      		push r26
- 1189 0574 BF93      		push r27
- 1190 0576 EF93      		push r30
- 1191 0578 FF93      		push r31
- 1192               	/* prologue: Signal */
- 1193               	/* frame size = 0 */
- 1194               	.LM181:
- 1195 057a 0E94 0000 		call UART_Interrupt_Service_Routine
- 1196               	/* epilogue start */
- 1197               	.LM182:
- 1198 057e FF91      		pop r31
- 1199 0580 EF91      		pop r30
- 1200 0582 BF91      		pop r27
- 1201 0584 AF91      		pop r26
- 1202 0586 9F91      		pop r25
- 1203 0588 8F91      		pop r24
- 1204 058a 7F91      		pop r23
- 1205 058c 6F91      		pop r22
- 1206 058e 5F91      		pop r21
- 1207 0590 4F91      		pop r20
- 1208 0592 3F91      		pop r19
- 1209 0594 2F91      		pop r18
- 1210 0596 0F90      		pop r0
- 1211 0598 0FBE      		out __SREG__,r0
- 1212 059a 0F90      		pop r0
- 1213 059c 1F90      		pop __zero_reg__
- 1214 059e 1895      		reti
- 1215               	.LFE29:
- 1217               		.comm UART,272,1
- 1426               	.Letext0:
+ 1156 0542 8217      		cp r24,r18
+ 1157 0544 9307      		cpc r25,r19
+ 1158 0546 00F4      		brsh .L107
+ 1159 0548 8091 0000 		lds r24,UART+260
+ 1160 054c 9091 0000 		lds r25,(UART+260)+1
+ 1161 0550 9093 0000 		sts (UART+264)+1,r25
+ 1162 0554 8093 0000 		sts UART+264,r24
+ 1163               	.L107:
+ 1164               	.LM179:
+ 1165 0558 2091 0000 		lds r18,UART+262
+ 1166 055c 3091 0000 		lds r19,(UART+262)+1
+ 1167 0560 8091 0000 		lds r24,UART+260
+ 1168 0564 9091 0000 		lds r25,(UART+260)+1
+ 1169 0568 2817      		cp r18,r24
+ 1170 056a 3907      		cpc r19,r25
+ 1171 056c 00F0      		brlo .L108
+ 1172 056e 1092 0000 		sts (UART+262)+1,__zero_reg__
+ 1173 0572 1092 0000 		sts UART+262,__zero_reg__
+ 1174               	.L108:
+ 1175               	/* epilogue start */
+ 1176               	.LM180:
+ 1177 0576 0F90      		pop __tmp_reg__
+ 1178 0578 CF91      		pop r28
+ 1179 057a DF91      		pop r29
+ 1180 057c 0895      		ret
+ 1181               	.LFE28:
+ 1183               	.global	__vector_18
+ 1185               	__vector_18:
+ 1186               	.LFB29:
+ 1187               	.LM181:
+ 1188 057e 1F92      		push __zero_reg__
+ 1189 0580 0F92      		push r0
+ 1190 0582 0FB6      		in r0,__SREG__
+ 1191 0584 0F92      		push r0
+ 1192 0586 1124      		clr __zero_reg__
+ 1193 0588 2F93      		push r18
+ 1194 058a 3F93      		push r19
+ 1195 058c 4F93      		push r20
+ 1196 058e 5F93      		push r21
+ 1197 0590 6F93      		push r22
+ 1198 0592 7F93      		push r23
+ 1199 0594 8F93      		push r24
+ 1200 0596 9F93      		push r25
+ 1201 0598 AF93      		push r26
+ 1202 059a BF93      		push r27
+ 1203 059c EF93      		push r30
+ 1204 059e FF93      		push r31
+ 1205               	/* prologue: Signal */
+ 1206               	/* frame size = 0 */
+ 1207               	.LM182:
+ 1208 05a0 0E94 0000 		call UART_Interrupt_Service_Routine
+ 1209               	/* epilogue start */
+ 1210               	.LM183:
+ 1211 05a4 FF91      		pop r31
+ 1212 05a6 EF91      		pop r30
+ 1213 05a8 BF91      		pop r27
+ 1214 05aa AF91      		pop r26
+ 1215 05ac 9F91      		pop r25
+ 1216 05ae 8F91      		pop r24
+ 1217 05b0 7F91      		pop r23
+ 1218 05b2 6F91      		pop r22
+ 1219 05b4 5F91      		pop r21
+ 1220 05b6 4F91      		pop r20
+ 1221 05b8 3F91      		pop r19
+ 1222 05ba 2F91      		pop r18
+ 1223 05bc 0F90      		pop r0
+ 1224 05be 0FBE      		out __SREG__,r0
+ 1225 05c0 0F90      		pop r0
+ 1226 05c2 1F90      		pop __zero_reg__
+ 1227 05c4 1895      		reti
+ 1228               	.LFE29:
+ 1230               		.comm UART,272,1
+ 1439               	.Letext0:
 DEFINED SYMBOLS
                             *ABS*:00000000 uart.c
-C:\Users\farid\AppData\Local\Temp/cc5HzlRT.s:2      *ABS*:0000003f __SREG__
-C:\Users\farid\AppData\Local\Temp/cc5HzlRT.s:3      *ABS*:0000003e __SP_H__
-C:\Users\farid\AppData\Local\Temp/cc5HzlRT.s:4      *ABS*:0000003d __SP_L__
-C:\Users\farid\AppData\Local\Temp/cc5HzlRT.s:5      *ABS*:00000034 __CCP__
-C:\Users\farid\AppData\Local\Temp/cc5HzlRT.s:6      *ABS*:00000000 __tmp_reg__
-C:\Users\farid\AppData\Local\Temp/cc5HzlRT.s:7      *ABS*:00000001 __zero_reg__
-C:\Users\farid\AppData\Local\Temp/cc5HzlRT.s:18     .text:00000000 UART_Struct_Init
+C:\Users\farid\AppData\Local\Temp/ccoYcisr.s:2      *ABS*:0000003f __SREG__
+C:\Users\farid\AppData\Local\Temp/ccoYcisr.s:3      *ABS*:0000003e __SP_H__
+C:\Users\farid\AppData\Local\Temp/ccoYcisr.s:4      *ABS*:0000003d __SP_L__
+C:\Users\farid\AppData\Local\Temp/ccoYcisr.s:5      *ABS*:00000034 __CCP__
+C:\Users\farid\AppData\Local\Temp/ccoYcisr.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\farid\AppData\Local\Temp/ccoYcisr.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\farid\AppData\Local\Temp/ccoYcisr.s:18     .text:00000000 UART_Struct_Init
                             *COM*:00000110 UART
-C:\Users\farid\AppData\Local\Temp/cc5HzlRT.s:90     .text:00000068 UART_Config_Transmitter
-C:\Users\farid\AppData\Local\Temp/cc5HzlRT.s:114    .text:0000007e UART_Config_Receiver
-C:\Users\farid\AppData\Local\Temp/cc5HzlRT.s:138    .text:00000094 UART_Config_Receiver_Interrupt
-C:\Users\farid\AppData\Local\Temp/cc5HzlRT.s:162    .text:000000a2 UART_Init
-C:\Users\farid\AppData\Local\Temp/cc5HzlRT.s:258    .text:00000118 UART_Transmit_Byte
-C:\Users\farid\AppData\Local\Temp/cc5HzlRT.s:279    .text:00000126 UART_Transmit_Byte_Hex
-C:\Users\farid\AppData\Local\Temp/cc5HzlRT.s:367    .text:00000180 UART_Transmit_Byte_Bin
-C:\Users\farid\AppData\Local\Temp/cc5HzlRT.s:484    .text:00000204 UART_Transmit_Text
-C:\Users\farid\AppData\Local\Temp/cc5HzlRT.s:526    .text:00000226 UART_Determine_Digit_Numbers
-C:\Users\farid\AppData\Local\Temp/cc5HzlRT.s:616    .text:000002a4 UART_Transmit_Number_Digits
-C:\Users\farid\AppData\Local\Temp/cc5HzlRT.s:668    .text:000002ce UART_Transmit_Number
-C:\Users\farid\AppData\Local\Temp/cc5HzlRT.s:715    .text:00000300 UART_Transmit_Fixed_Digit_Number
-C:\Users\farid\AppData\Local\Temp/cc5HzlRT.s:808    .text:0000036a UART_Print_Debug_Data
-C:\Users\farid\AppData\Local\Temp/cc5HzlRT.s:872    .text:000003bc UART_Receive_Byte
-C:\Users\farid\AppData\Local\Temp/cc5HzlRT.s:933    .text:00000404 UART_Read_From_Buffer
-C:\Users\farid\AppData\Local\Temp/cc5HzlRT.s:952    .text:0000040e UART_Current_Buffer_Index
-C:\Users\farid\AppData\Local\Temp/cc5HzlRT.s:968    .text:0000041a UART_Current_Read_Index
-C:\Users\farid\AppData\Local\Temp/cc5HzlRT.s:984    .text:00000426 UART_Bytes_Available_To_Read
-C:\Users\farid\AppData\Local\Temp/cc5HzlRT.s:1000   .text:00000432 UART_Read
-C:\Users\farid\AppData\Local\Temp/cc5HzlRT.s:1050   .text:00000492 UART_Flush_Buffer
-C:\Users\farid\AppData\Local\Temp/cc5HzlRT.s:1094   .text:000004d0 UART_Last_Byte_Recevied_Time_Stamp
-C:\Users\farid\AppData\Local\Temp/cc5HzlRT.s:1113   .text:000004e6 UART_Interrupt_Service_Routine
-C:\Users\farid\AppData\Local\Temp/cc5HzlRT.s:1172   .text:00000558 __vector_18
+C:\Users\farid\AppData\Local\Temp/ccoYcisr.s:90     .text:00000068 UART_Config_Transmitter
+C:\Users\farid\AppData\Local\Temp/ccoYcisr.s:114    .text:0000007e UART_Config_Receiver
+C:\Users\farid\AppData\Local\Temp/ccoYcisr.s:138    .text:00000094 UART_Config_Receiver_Interrupt
+C:\Users\farid\AppData\Local\Temp/ccoYcisr.s:162    .text:000000a2 UART_Init
+C:\Users\farid\AppData\Local\Temp/ccoYcisr.s:258    .text:00000118 UART_Transmit_Byte
+C:\Users\farid\AppData\Local\Temp/ccoYcisr.s:279    .text:00000126 UART_Transmit_Byte_Hex
+C:\Users\farid\AppData\Local\Temp/ccoYcisr.s:367    .text:00000180 UART_Transmit_Byte_Bin
+C:\Users\farid\AppData\Local\Temp/ccoYcisr.s:484    .text:00000204 UART_Transmit_Text
+C:\Users\farid\AppData\Local\Temp/ccoYcisr.s:526    .text:00000226 UART_Determine_Digit_Numbers
+C:\Users\farid\AppData\Local\Temp/ccoYcisr.s:616    .text:000002a4 UART_Transmit_Number_Digits
+C:\Users\farid\AppData\Local\Temp/ccoYcisr.s:668    .text:000002ce UART_Transmit_Number
+C:\Users\farid\AppData\Local\Temp/ccoYcisr.s:715    .text:00000300 UART_Transmit_Fixed_Digit_Number
+C:\Users\farid\AppData\Local\Temp/ccoYcisr.s:808    .text:0000036a UART_Print_Debug_Data
+C:\Users\farid\AppData\Local\Temp/ccoYcisr.s:872    .text:000003bc UART_Receive_Byte
+C:\Users\farid\AppData\Local\Temp/ccoYcisr.s:933    .text:00000404 UART_Read_From_Buffer
+C:\Users\farid\AppData\Local\Temp/ccoYcisr.s:952    .text:0000040e UART_Current_Buffer_Index
+C:\Users\farid\AppData\Local\Temp/ccoYcisr.s:968    .text:0000041a UART_Current_Read_Index
+C:\Users\farid\AppData\Local\Temp/ccoYcisr.s:984    .text:00000426 UART_Bytes_Available_To_Read
+C:\Users\farid\AppData\Local\Temp/ccoYcisr.s:1000   .text:00000432 UART_Read
+C:\Users\farid\AppData\Local\Temp/ccoYcisr.s:1050   .text:00000492 UART_Flush_Buffer
+C:\Users\farid\AppData\Local\Temp/ccoYcisr.s:1094   .text:000004d0 UART_Last_Byte_Recevied_Time_Stamp
+C:\Users\farid\AppData\Local\Temp/ccoYcisr.s:1113   .text:000004e6 UART_Interrupt_Service_Routine
+C:\Users\farid\AppData\Local\Temp/ccoYcisr.s:1185   .text:0000057e __vector_18
 
 UNDEFINED SYMBOLS
 __udivmodsi4

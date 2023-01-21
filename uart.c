@@ -288,6 +288,7 @@ void UART_Interrupt_Service_Routine(void){
          UART.Buffer[UART.BufferIndex]=received_byte;
          UART.BufferIndex++;
          UART.AvailableBytes++;
+		 if(UART.AvailableBytes>UART.BufferSize){UART.AvailableBytes=UART.BufferSize;}
          if(UART.BufferIndex>=UART.BufferSize){UART.BufferIndex=0;}
          //UART.LastRecivedTimeStamp=millis();
     }
